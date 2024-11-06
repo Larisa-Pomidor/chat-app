@@ -10,6 +10,7 @@ app.use(express.static('public'));
 
 io.on('connection', (socket) => {
     socket.on('chatMessage', (msg) => {
+        // broadcast the message to all the connected clients
         io.emit('chatMessage', msg);
     });
 
