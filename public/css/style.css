@@ -1,0 +1,53 @@
+.chat-outer {
+    width: 400px;
+}
+
+#chat {
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+#message {
+    width: 76%;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#send {
+    width: 22%;
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 10px;
+    background: black;
+    color: white;
+}
+
+.control-box {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chat__message-block {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.029);
+}
+
+.chat__message-block:nth-child(even) {
+    background: rgba(0, 0, 0, 0.122);
+}
+
+.chat__message-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat__message-date {
+    font-size: 10px;
+}

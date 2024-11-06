@@ -5,27 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat Application</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <div id="chat"></div>
-    <input id="message" type="text" placeholder="Type your message..." autocomplete="off" />
-    <button onclick="sendMessage()">Send</button>
+    <div class="chat-outer">
+        <div id="chat"></div>
+        <div class="control-box">
+            <input id="message" type="text" placeholder="Type your message..." autocomplete="off"
+                onkeydown="handleEnter(event)" />
+            <button id="send" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-        const socket = io(); 
+        function handleEnter(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+
+        const socket = io();
 
         function sendMessage() {
             const message = document.getElementById('message').value;
-            socket.emit('chatMessage', message); 
-            document.getElementById('message').value = ''; 
+            socket.emit('chatMessage', message);
+            document.getElementById('message').value = '';
+        }
+
+        function createDate() {
+            const now = new Date();
+            const date = now.toLocaleDateString();
+            const time = now.toLocaleTimeString();
+
+            return time + " " + date;
         }
 
         socket.on('chatMessage', (msg) => {
             const chat = document.getElementById('chat');
             const messageElement = document.createElement('div');
-            messageElement.textContent = msg;
+            messageElement.classList.add("chat__message-block");
+            messageElement.innerHTML =
+                `<div class="chat__message">${msg}</div>
+                 <div class="chat__message-date">${createDate()}</div>`;
             chat.appendChild(messageElement);
         });
     </script>
